@@ -68,6 +68,7 @@ class CpuUtils {
     return (high << 32) | low;
 // ----------------------------------------------------------------
 #elif defined(__aarch64__)
+    return DUMMY_CYCLE_CLOCK;
     // System timer of ARMv8 runs at a different frequency than the CPU's.
     // The frequency is fixed, typically in the range 1-50MHz.  It can because
     // read at CNTFRQ special register.  We assume the OS has set up
