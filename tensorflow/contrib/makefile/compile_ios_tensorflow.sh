@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+set -x
 # Builds the TensorFlow core library with ARM and x86 architectures for iOS, and
 # packs them into a fat file.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -50,7 +51,8 @@ usage() {
   exit 1
 }
 
-BUILD_TARGET="x86_64 armv7 armv7s arm64"
+# BUILD_TARGET="x86_64 armv7 armv7s arm64"
+BUILD_TARGET="x86_64 arm64"
 while getopts "a:f:h:n:" opt_name; do
   case "$opt_name" in
     a) BUILD_TARGET="${OPTARG}";;

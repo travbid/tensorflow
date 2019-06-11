@@ -564,6 +564,7 @@ Status ConstantFold(const ConstantFoldingOptions& opts,
                     FunctionLibraryRuntime* function_library, Env* env,
                     const Device* partition_device, Graph* graph,
                     bool* was_mutated) {
+  VLOG(0) << "ConstantFold()";
   // TensorFlow flushes denormals to zero and rounds to nearest, so we do
   // the same here.
   port::ScopedFlushDenormal flush;

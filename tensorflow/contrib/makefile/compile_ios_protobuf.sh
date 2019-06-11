@@ -16,7 +16,7 @@
 # Builds protobuf 3 for iOS.
 
 set -e
-
+set -x
 if [[ -n MACOSX_DEPLOYMENT_TARGET ]]; then
     export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
 fi

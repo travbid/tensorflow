@@ -15,7 +15,7 @@
 # ==============================================================================
 
 set -e
-
+set -x
 # Make sure we're on OS X.
 if [[ $(uname) != "Darwin" ]]; then
     echo "ERROR: This makefile build requires macOS, which the current system "\
@@ -95,10 +95,10 @@ fi
 if [[ "${ONLY_MAKE_TENSORFLOW}" != "true" ]]; then
     # Remove any old files first.
     make -f tensorflow/contrib/makefile/Makefile clean
-    rm -rf tensorflow/contrib/makefile/downloads
+    # rm -rf tensorflow/contrib/makefile/downloads
 
     # Pull down the required versions of the frameworks we need.
-    tensorflow/contrib/makefile/download_dependencies.sh
+    # tensorflow/contrib/makefile/download_dependencies.sh
 
     if [[ -z "${BUILD_ARCH}" ]]; then
         # Compile protobuf for the target iOS device architectures.
@@ -129,6 +129,9 @@ if [[ ! -z "${OPTIMIZE_FOR_GRAPH}" ]]; then
     TF_CC_FLAGS="${TF_CC_FLAGS} -DANDROID_TYPES=__ANDROID_TYPES_FULL__ -DSELECTIVE_REGISTRATION -DSUPPORT_SELECTIVE_REGISTRATION"
     # The Makefile checks the env var to decide which ANDROID_TYPES to build
     export ANDROID_TYPES="-D__ANDROID_TYPES_FULL__"
+else
+    TF_CC_FLAGS="${TF_CC_FLAGS} -DANDROID_TYPES=__ANDROID_TYPES_FULL__"
+    export ANDROID_TYPES="-D__ANDROID_TYPES_FULL__"
 fi
 
 if [[ ! -z "${BUILD_ARCH}" ]]; then
@@ -138,7 +141,7 @@ fi
 
 # build the ios tensorflow libraries.
 echo "Building TensorFlow with command: ${TF_SCRIPT_FLAGS} -f ${TF_CC_FLAGS}"
-tensorflow/contrib/makefile/compile_ios_tensorflow.sh ${TF_SCRIPT_FLAGS} -f "${TF_CC_FLAGS}"
+# tensorflow/contrib/makefile/compile_ios_tensorflow.sh ${TF_SCRIPT_FLAGS} -f "${TF_CC_FLAGS}"
 
 # Creates a static universal library in
 # tensorflow/contrib/makefile/gen/lib/libtensorflow-core.a

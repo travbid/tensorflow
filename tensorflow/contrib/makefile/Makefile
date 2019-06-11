@@ -46,9 +46,9 @@ ifdef HEXAGON_LIBS
 	endif
 endif # HEXAGON_LIBS
 
-# If ANDROID_TYPES is not set assume __ANDROID_TYPES_SLIM__
+# If ANDROID_TYPES is not set assume __ANDROID_TYPES_FULL__
 ifeq ($(ANDROID_TYPES),)
-	ANDROID_TYPES := -D__ANDROID_TYPES_SLIM__
+	ANDROID_TYPES := -D__ANDROID_TYPES_FULL__
 endif
 
 # Try to figure out the host system
@@ -571,7 +571,7 @@ ifeq ($(TARGET),IOS)
 		-arch i386 \
 		-mno-sse \
 		-fembed-bitcode \
-		-D__thread=thread_local \
+		-D__thread= \
 		-DUSE_GEMM_FOR_CONV \
 		-Wno-c++11-narrowing \
 		-DTF_LEAN_BINARY \
@@ -814,7 +814,7 @@ BENCHMARK_OBJS := $(addprefix $(OBJDIR), $(BENCHMARK_SRCS:.cc=.o))
 .PHONY: clean cleantarget
 
 # The target that's compiled if there's no command-line arguments.
-all: $(LIB_PATH) $(BENCHMARK_NAME)
+all: $(LIB_PATH) # $(BENCHMARK_NAME)
 
 # Rules for target compilation.
 
