@@ -107,7 +107,6 @@ Status ClientSession::Run(const RunOptions& run_options, const FeedType& inputs,
                           const std::vector<Operation>& run_outputs,
                           std::vector<Tensor>* outputs,
                           RunMetadata* run_metadata) const {
-  VLOG(0) << "ClientSession::Run()\n";
   std::vector<std::pair<string, Tensor>> feeds;
   for (auto const& feed : inputs) {
     TF_RETURN_IF_ERROR(feed.second.status);

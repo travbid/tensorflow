@@ -1612,7 +1612,6 @@ bool MightTrace(const NodeItem& item,
 }
 
 void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_nsec) {
-  VLOG(0) << "ExecutorState::Process()";
   WithContext wc(context_);
   const GraphView& gview = impl_->gview_;
   TaggedNodeSeq ready;
@@ -1831,9 +1830,7 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_nsec) {
         } else {
           // In the common case, avoid creating any tracing objects.
           if (op_kernel->IsExpensive()) {
-            VLOG(0) << "   isExpensive, KernelTimer";
             KernelTimer timer;
-				VLOG(0) << "   KernelTimer initialized";
             device->Compute(op_kernel, &ctx);
             op_kernel->UpdateCostEstimate(timer.ElapsedCycles());
           } else {
